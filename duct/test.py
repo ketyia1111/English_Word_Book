@@ -3,6 +3,11 @@ from tkinter_create import mainframe2
 from tkinter_create import mainframe3
 import tkinter as tk
 
+def write():
+    if vocabulary.get() == "" or speake.get() == "" or japanese.get() == "" or example_entry.get() == "":
+        messagebox.showwarning('エラー', '入力されていない項目があります')
+
+
 #メインの画面
 win = tk.Tk()
 

@@ -91,9 +91,10 @@ class mainframe(tk.Frame):
 
     
 
+
     def create_textarea(self):
 
-        entry = tk.Text(
+        self.entry = tk.Text(
             
             self.formframe,
             height=self.height,
@@ -102,7 +103,7 @@ class mainframe(tk.Frame):
             bd=self.bd
         )
 
-        entry.grid(row=self.id-1, column=1,padx=10)
+        self.entry.grid(row=self.id-1, column=1,padx=10)
 
     def button_set(self,id,lorr,text,width,height,font1="MSゴシック", font2="10", font3="bold",bd=3):
         
@@ -139,6 +140,20 @@ class mainframe(tk.Frame):
                 bd=self.bd)
 
         button.pack(pady=15)
+
+    def get_vocabulary():
+        return self.vocabulary.get()
+
+    def get_speak():
+        return self.speak.get()
+    
+    def get_japanese():
+        return self.japanese.get()
+
+    def get_example():
+        return self.entry.get()
+
+
 
 class mainframe2(tk.Frame):
     def __init__(self,master):

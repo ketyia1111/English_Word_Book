@@ -1,6 +1,25 @@
+from tkinter import messagebox
+from excel import ExcelOperator
 import os, sys, time
-import tkinter as tk
+import tkinter as tk 
 
+def clear():
+    vocabulary_entry.delete(0, 'end') 
+    speake_entry.delete(0, 'end')
+    japanese_entry.delete(0,'end')
+    example_entry.delete(1.0,'end')
+
+def write():
+    if vocabulary.get() == "" or speake.get() == "" or japanese.get() == "" or example_entry.get('1.0', 'end') == "":
+        messagebox.showwarning('エラー', '入力されていない項目があります')
+    else:
+        excel = ExcelOperator("./english_project_only_use.xlsx")
+
+        excel.write_cell(vocabulary.get() , speake.get() , japanese.get() , example_entry.get('1.0', 'end'))
+
+        clear()
+
+        messagebox.showinfo('書き込み完了', '単語を追加しました!')
 
 
 
@@ -55,7 +74,7 @@ vocabulary_entry.grid(row=0, column=1,padx=10)
 #3
 
 label2 = tk.Label(formframe,
-                 text='発音記号',
+                 text='発音',
                  font=("MSゴシック", "20", "bold"))
 
 label2.grid(row=1, column=0)
@@ -110,7 +129,8 @@ clear_button = tk.Button(
                 text="クリア",
                 width=10, 
                 height=3,
-                font=("MSゴシック", "10", "bold")
+                font=("MSゴシック", "10", "bold"),
+                command=clear
                 )
 clear_button.grid(row=4, column=0,pady=10)
 
@@ -120,6 +140,7 @@ ok_button = tk.Button(
                 width=30, 
                 height=3,
                 font=("MSゴシック", "10", "bold"),
+                command=write,
                 bd=3)
 
 ok_button.grid(row=4, column=1,pady=10)
