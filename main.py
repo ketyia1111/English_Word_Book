@@ -23,6 +23,77 @@ def write():
 
 
 
+def test():
+
+    root = tk.Tk()
+
+    root.title("English vocabulary test")
+
+    root.geometry("600x400")
+
+    # メインフレームの作成と設置
+    topframe = tk.Frame(root,relief=tk.RAISED)
+    topframe.pack(padx=5,pady=20)
+
+    
+
+    def action():
+
+        excel = ExcelOperator("./english_project_only_use.xlsx")
+    
+        count = excel.get_row_count()
+
+        global index
+
+        index += 1
+
+        if index <= count:
+            test_button.config(text="次へ")
+        else:
+            test_button.config(text="テストが終了しました")
+    
+        if index-1 <= count-1:
+            index_label.config(text=f"{index-1}/{count-1}")
+            index1_label.config(text=excel.getvoc(index))
+            index2_label.config(text=excel.getspeak(index))
+            index3_label.config(text=excel.getjap(index))
+            index4_label.config(text=excel.getexa(index))
+
+    label = tk.Label(topframe, text="英単語帳",justify="center",font=("MSゴシック", "20", "bold"))
+    label.grid()
+
+    index_label = tk.Label(root)
+    index_label.pack(pady=10)
+
+    index1_label = tk.Label(root)
+    index1_label.pack(pady=10)
+
+    index2_label = tk.Label(root)
+    index2_label.pack(pady=10)
+
+    index3_label = tk.Label(root)
+    index3_label.pack(pady=10)
+
+    index4_label = tk.Label(root)
+    index4_label.pack(pady=10)
+
+    test_button = tk.Button(
+            topframe,
+            text="テストスタート",
+            width=20, 
+            height=3,
+            font=("MSゴシック", "10", "bold"),
+            command=action
+    )
+    test_button.grid()
+    
+    root.mainloop()
+
+
+
+index = 1
+
+
 # メインウィンドウ作成
 root = tk.Tk()
 
@@ -152,7 +223,8 @@ test_button = tk.Button(
                 height=3,
                 font=("MSゴシック", "10", "bold"),
                 bd=3,
-                bg="chocolate"
+                bg="chocolate",
+                command=test
                 )
 
 test_button.pack(pady=20)

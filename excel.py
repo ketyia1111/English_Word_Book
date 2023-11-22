@@ -43,3 +43,24 @@ class ExcelOperator:
         
 
         self.wb.save(self.file_name)
+
+    def get_row_count(self):
+
+        row_count = self.sheet.max_row
+
+        return row_count
+
+
+    def getvoc(self,id):
+
+        return self.sheet[f'B{id}'].value
+
+    def getspeak(self,id):
+        return self.sheet[f'C{id}'].value
+
+
+    def getjap(self,id):
+        return self.sheet[f'D{id}'].value
+    
+    def getexa(self,id):
+        return self.sheet[f'E{id}'].value
